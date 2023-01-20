@@ -11,6 +11,7 @@ abstract class Department {
     }
 
     abstract description(): void;
+    
     addEmployee(employee: string) {
         this.employees.push(employee)
     }

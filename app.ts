@@ -1,60 +1,73 @@
-// interface Person {
-//     firstName: string;
-//     lastName: string;
-//     age: number;
 
-//     sayGreeting(message: string): void;
-// }
+// Implementing function using the custom type
 
+type addFunc = (firstParam: number, secondParam: number) => number;
 
-// let user: Person;
+let adder: addFunc;
 
-// user = {
-//     firstName: 'Temitayo',
-//     lastName: 'Sosanya',
-//     age: 21,
-
-//     sayGreeting(message: string){
-//         console.log(message + ' ' + 'from ' + this.firstName + ' ' + this.lastName);
-        
-//     }
-// }
-
-//user.sayGreeting('Welcome to my object interface learning section using Typescript')
-
-interface Greetings {
-
-    sayGreeting(message: string): void
+adder = (firstParam, secondParam) => {
+    return firstParam + secondParam;
 }
+
+
+console.log(`The result of the adder function from function implementation using custom type is: ${adder(50, 545)}`);
+
+// Implmenting fucntion using an interface
+
+interface addFucnt {
+    (firstParam: number, secondParam: number): number;
+}
+
+let adderr: addFucnt;
+
+adderr = (firstParams, secondParams) => {
+    return firstParams + secondParams
+}
+
+console.log(`The result of the adder function from function implementation using interface is: ${adderr(50, 50)}`);
+
+
+//Working with optional parameters
+
+interface subFunc {
+
+    (firstParam?: number, secondParam?: number): number
+}
+
+let subFunc: subFunc;
+
+subFunc = (firstParam = 5, secondParam = 2) => {
+    return firstParam - secondParam;
+}
+
+console.log(subFunc());
+
 
 interface User {
-    readonly firstName: string;
-    lastName: string;
+    firstname: string;
+    middlename?: string;
+    lastname: string;
 }
 
-class Person implements Greetings, User {
-    firstName: string;
-    lastName: string;
-    age: number
-    constructor (age: number, lastName: string, firstName: string){
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.age = age
+interface Greeter extends User {
+    greet(message: string): void
+}
+
+class Person implements Greeter {
+    firstname: string;
+    lastname: string;
+    //middlename: string;
+
+    constructor (firstname: string, lastname: string) {
+        this.firstname = firstname;
+        this.lastname = lastname;
     }
 
-    sayGreeting(message: string): void {
-        console.log('The message ' + `"${message}"` + ' ' + 'is from ' + this.firstName + ' ' + this.lastName);
+    greet(): void {
+        console.log(`Welcome to ${this.firstname} ${this.lastname} class implementation using optional parameters learning section`);
         
     }
 }
 
-
-type data = User & Greetings;
-let user: data;
-
-user = new Person(23, 'Sosanya', 'Temitayo')
-user.lastName = 'Nurudeen'
-
-console.log(user.firstName + ' ' + user.lastName);
-
-user.sayGreeting('Welcome to my class implementation of interface class .......')
+const user = new Person('Temitayo', 'Sosanya')
+user.greet()
