@@ -15,3 +15,5 @@ function concatinator(
 }
 
 console.log(concatinator(56, '240', 'as-a-number'))
+
+

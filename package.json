@@ -2,7 +2,7 @@
   "name": "learningtypescript",
   "version": "1.0.0",
   "description": "Learning TYpeScript",
-  "main": "app.js",
+  "main": "abstractClass.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "lite-server"
