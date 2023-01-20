@@ -28,11 +28,11 @@
 
 // Building my own generic
 
-function merger<T extends object, U extends object> (objA: T, objB: U) {
+function merger<T extends object, U extends object> (objA: T, objB: T) {
     return Object.assign(objA, objB);
 }
 
-const merged = merger({name: 'MallamTY'}, {age: 45})
+const merged = merger({name: 'MallamTY', hobbies: ['Playing Football', 'Writing Codes', 'Politics']}, {age: 45})
 console.log(merged);
 
 
@@ -56,5 +56,78 @@ function countAndDescribe<Ttype extends length>(element: Ttype){
 
 }
 
+// keyof contstraint
 
-console.log(countAndDescribe(''))
+
+
+function getKeyValue<Ttype extends object, U extends keyof Ttype >(obj: Ttype, key: U) {
+    return obj[key]
+}
+
+
+console.log(getKeyValue({name: 'MallamTY', age: 23}, 'name'));
+
+
+//console.log(countAndDescribe(''))
+
+
+// Generic type with class
+
+class dataStorage<T extends boolean | string | number> {
+    private data: T[] = [];
+
+    get obtainValue(){
+        return this.getItems();
+    }
+    addItem(item: T) {
+        this.data.push(item)
+    }
+
+    removeItem(item: T) {
+        let index = this.data.indexOf(item)
+        console.log(index);
+        
+        return this.data.splice(index, 1)
+    }
+
+    getItems() {
+        return this.data;
+    }
+}
+
+const textStorage = new dataStorage<string>();
+textStorage.addItem('MallamTY')
+textStorage.addItem('Temitayo')
+textStorage.addItem('Sosanya')
+textStorage.addItem('Idris');
+
+console.log(textStorage.removeItem('Temitayo'));
+
+console.log(textStorage.getItems());
+
+
+
+const numberStorage = new dataStorage<number>();
+numberStorage.addItem(34);
+numberStorage.addItem(67);
+numberStorage.addItem(89);
+numberStorage.addItem(23);
+numberStorage.addItem(900);
+
+const number_String_Storage = new dataStorage<number | string>();
+number_String_Storage.addItem('Welcome');
+number_String_Storage.addItem('to');
+number_String_Storage.addItem('the');
+number_String_Storage.addItem('number');
+number_String_Storage.addItem(50);
+number_String_Storage.addItem('class');
+
+console.log(number_String_Storage.obtainValue);
+
+const objectStorage = new dataStorage<object>()
+objectStorage.addItem({name: 'Temitayo'})
+objectStorage.addItem({name: 'Sosanya'})
+objectStorage.addItem({name: 'Idris Sosanya'});
+
+console.log(objectStorage.removeItem({name: 'Temitayo'}));
+
