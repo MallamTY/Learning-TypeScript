@@ -124,10 +124,35 @@ number_String_Storage.addItem('class');
 
 console.log(number_String_Storage.obtainValue);
 
-const objectStorage = new dataStorage<object>()
-objectStorage.addItem({name: 'Temitayo'})
-objectStorage.addItem({name: 'Sosanya'})
-objectStorage.addItem({name: 'Idris Sosanya'});
+// const objectStorage = new dataStorage<object>()
+// objectStorage.addItem({name: 'Temitayo'})
+// objectStorage.addItem({name: 'Sosanya'})
+// objectStorage.addItem({name: 'Idris Sosanya'});
 
-console.log(objectStorage.removeItem({name: 'Temitayo'}));
+// console.log(objectStorage.removeItem({name: 'Temitayo'}));
+
+
+//Utility types in Typescript
+
+interface coursePattern {
+    title: string;
+    description: string;
+    completionDate: Date;
+}
+
+function createCourse(title: string, description: string, completionDate: Date): coursePattern {
+    let  course: Partial<coursePattern> = {};
+    course.title = title;
+    course.completionDate = completionDate;
+    course.description = description;
+
+    return course as coursePattern;
+}
+
+// Readonly
+
+const products: Readonly<string[]> = ['Books', 'Pen', 'Groceries', 'Soft drinks']
+
+console.log(products[3]);
+
 

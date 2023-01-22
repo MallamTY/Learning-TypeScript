@@ -1,3 +1,4 @@
+"use strict";
 // const names: Array<string> = [] // This code line is same thing as const name: string[] = []
 // const promise: Promise<string>  = new Promise((resolve, reject) => {
 //     setTimeout(() => {
@@ -22,18 +23,18 @@
 function merger(objA, objB) {
     return Object.assign(objA, objB);
 }
-var merged = merger({ name: 'MallamTY', hobbies: ['Playing Football', 'Writing Codes', 'Politics'] }, { age: 45 });
+const merged = merger({ name: 'MallamTY', hobbies: ['Playing Football', 'Writing Codes', 'Politics'] }, { age: 45 });
 console.log(merged);
 function countAndDescribe(element) {
-    var description = "has no value in there";
+    let description = `has no value in there`;
     if (element.length === 0) {
-        return "\"".concat(element, "\", ").concat(description);
+        return `"${element}", ${description}`;
     }
     else if (element.length === 1) {
-        return description = "\"".concat(element, "\" has ").concat(element.length, " element");
+        return description = `"${element}" has ${element.length} element`;
     }
     else {
-        return description = "\"".concat(element, "\" has ").concat(element.length, " elements");
+        return description = `"${element}" has ${element.length} elements`;
     }
 }
 // keyof contstraint
@@ -43,44 +44,39 @@ function getKeyValue(obj, key) {
 console.log(getKeyValue({ name: 'MallamTY', age: 23 }, 'name'));
 //console.log(countAndDescribe(''))
 // Generic type with class
-var dataStorage = /** @class */ (function () {
-    function dataStorage() {
+class dataStorage {
+    constructor() {
         this.data = [];
     }
-    Object.defineProperty(dataStorage.prototype, "obtainValue", {
-        get: function () {
-            return this.getItems();
-        },
-        enumerable: false,
-        configurable: true
-    });
-    dataStorage.prototype.addItem = function (item) {
+    get obtainValue() {
+        return this.getItems();
+    }
+    addItem(item) {
         this.data.push(item);
-    };
-    dataStorage.prototype.removeItem = function (item) {
-        var index = this.data.indexOf(item);
+    }
+    removeItem(item) {
+        let index = this.data.indexOf(item);
         console.log(index);
         return this.data.splice(index, 1);
-    };
-    dataStorage.prototype.getItems = function () {
+    }
+    getItems() {
         return this.data;
-    };
-    return dataStorage;
-}());
-var textStorage = new dataStorage();
+    }
+}
+const textStorage = new dataStorage();
 textStorage.addItem('MallamTY');
 textStorage.addItem('Temitayo');
 textStorage.addItem('Sosanya');
 textStorage.addItem('Idris');
 console.log(textStorage.removeItem('Temitayo'));
 console.log(textStorage.getItems());
-var numberStorage = new dataStorage();
+const numberStorage = new dataStorage();
 numberStorage.addItem(34);
 numberStorage.addItem(67);
 numberStorage.addItem(89);
 numberStorage.addItem(23);
 numberStorage.addItem(900);
-var number_String_Storage = new dataStorage();
+const number_String_Storage = new dataStorage();
 number_String_Storage.addItem('Welcome');
 number_String_Storage.addItem('to');
 number_String_Storage.addItem('the');
@@ -88,8 +84,13 @@ number_String_Storage.addItem('number');
 number_String_Storage.addItem(50);
 number_String_Storage.addItem('class');
 console.log(number_String_Storage.obtainValue);
-var objectStorage = new dataStorage();
-objectStorage.addItem({ name: 'Temitayo' });
-objectStorage.addItem({ name: 'Sosanya' });
-objectStorage.addItem({ name: 'Idris Sosanya' });
-console.log(objectStorage.removeItem({ name: 'Temitayo' }));
+function createCourse(title, description, completionDate) {
+    let course = {};
+    course.title = title;
+    course.completionDate = completionDate;
+    course.description = description;
+    return course;
+}
+// Readonly
+const products = ['Books', 'Pen', 'Groceries', 'Soft drinks'];
+console.log(products[3]);
